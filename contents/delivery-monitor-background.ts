@@ -1,6 +1,6 @@
 import type { PlasmoCSConfig  } from "plasmo";
 import { Storage } from "@plasmohq/storage"
-import { ALARM_NAMES, ORDER_KEY_TYPES, getOrderKey } from "./common"
+import { ALARM_NAMES, ORDER_KEY_TYPES, getOrderKey } from "./delivery-monitor-common"
 
 const TEN_SECONDS_IN_MS = 10000
 

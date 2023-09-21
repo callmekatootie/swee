@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+textarea {
+  @apply appearance-none px-3 rounded-none
+}
+
+textarea:focus {
+  @apply outline-none
+}

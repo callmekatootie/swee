@@ -1,0 +1,8 @@
+#plasmo-shadow-container {
+  z-index: 1!important;
+}
+
+.plasmo-shield {
+  /* Swiggy's style for the item description element */
+  width: calc(100% - 164px);
+}
