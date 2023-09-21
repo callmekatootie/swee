@@ -1,13 +1,19 @@
-import type { PlasmoCSConfig  } from "plasmo";
+import type { PlasmoCSConfig } from "plasmo"
+
 import { Storage } from "@plasmohq/storage"
-import { ALARM_NAMES, ORDER_KEY_TYPES, getOrderKey } from "./delivery-monitor-common"
+
+import {
+  ALARM_NAMES,
+  getOrderKey,
+  ORDER_KEY_TYPES
+} from "./delivery-monitor-common"
 
 const TEN_SECONDS_IN_MS = 10000
 
 const INTERVAL_REFS = {
   INITIALIZE_MONITOR: null,
   MONITOR_DELIVERY: null,
-  MONITOR_DELIVERED: null,
+  MONITOR_DELIVERED: null
 }
 
 const storage = new Storage()
@@ -17,8 +23,15 @@ export const config: PlasmoCSConfig = {
 }
 
 function getEstimatedDelivery(): string | null {
-  const currentETAXPath = '//div[text()="ARRIVING IN"]/following-sibling::div[1]/text()'
-  const currentETANode = document.evaluate(currentETAXPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+  const currentETAXPath =
+    '//div[text()="ARRIVING IN"]/following-sibling::div[1]/text()'
+  const currentETANode = document.evaluate(
+    currentETAXPath,
+    document,
+    null,
+    XPathResult.FIRST_ORDERED_NODE_TYPE,
+    null
+  ).singleNodeValue
 
   if (currentETANode) {
     const mins = parseInt(currentETANode.textContent.split(" mins")[0], 10)
@@ -37,7 +50,13 @@ function getEstimatedDelivery(): string | null {
 
 function checkForDeliveredStatus(): boolean {
   const completedDeliveryXPath = '//h2[text()="Order Delivered"]'
-  const completedDeliveryNode = document.evaluate(completedDeliveryXPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+  const completedDeliveryNode = document.evaluate(
+    completedDeliveryXPath,
+    document,
+    null,
+    XPathResult.FIRST_ORDERED_NODE_TYPE,
+    null
+  ).singleNodeValue
 
   if (completedDeliveryNode) {
     console.log("checkForDeliveredStats", true)
@@ -51,7 +70,10 @@ function checkForDeliveredStatus(): boolean {
 
 async function registerInitAlarm() {
   // Check for initial ETA every 10 seconds
-  INTERVAL_REFS.INITIALIZE_MONITOR = setInterval(async () => await handleAlarms(ALARM_NAMES.INITIALIZE_MONITOR), TEN_SECONDS_IN_MS)
+  INTERVAL_REFS.INITIALIZE_MONITOR = setInterval(
+    async () => await handleAlarms(ALARM_NAMES.INITIALIZE_MONITOR),
+    TEN_SECONDS_IN_MS
+  )
   console.log("registerInitAlarm sets up initialize monitor interval")
 }
 
@@ -74,16 +96,26 @@ async function handleInitialDelivery() {
   clearInterval(ALARM_NAMES.INITIALIZE_MONITOR)
 
   await registerMonitorAlarm()
-  console.log("handleInitialDelivery cleared initialize alarm and registered monitor delivery alarm")
+  console.log(
+    "handleInitialDelivery cleared initialize alarm and registered monitor delivery alarm"
+  )
 }
 
 async function registerMonitorAlarm() {
   // Check for ETA every 10 seconds
-  INTERVAL_REFS.MONITOR_DELIVERY = setInterval(() => handleAlarms(ALARM_NAMES.MONITOR_DELIVERY), TEN_SECONDS_IN_MS)
+  INTERVAL_REFS.MONITOR_DELIVERY = setInterval(
+    () => handleAlarms(ALARM_NAMES.MONITOR_DELIVERY),
+    TEN_SECONDS_IN_MS
+  )
   // Check for delivered status every 10 seconds
-  INTERVAL_REFS.MONITOR_DELIVERED = setInterval(() => handleAlarms(ALARM_NAMES.MONITOR_DELIVERED), TEN_SECONDS_IN_MS)
+  INTERVAL_REFS.MONITOR_DELIVERED = setInterval(
+    () => handleAlarms(ALARM_NAMES.MONITOR_DELIVERED),
+    TEN_SECONDS_IN_MS
+  )
   // TODO - Check for cancelled status every 10 seconds
-  console.log("registerMonitorAlarm registered two interval functions to check for delivery and delivered statuses")
+  console.log(
+    "registerMonitorAlarm registered two interval functions to check for delivery and delivered statuses"
+  )
 }
 
 async function handleUpdatedDelivery() {
@@ -116,12 +148,12 @@ async function handleAlarms(alarmName: string) {
   } else if (alarmName === ALARM_NAMES.MONITOR_DELIVERY) {
     await handleUpdatedDelivery()
   } else if (alarmName === ALARM_NAMES.MONITOR_DELIVERED) {
-    await handleDeliveredStatus()    
+    await handleDeliveredStatus()
   }
 }
 
 function clearAllIntervals() {
-  Object.keys(INTERVAL_REFS).forEach(ref => clearInterval(INTERVAL_REFS[ref]))
+  Object.keys(INTERVAL_REFS).forEach((ref) => clearInterval(INTERVAL_REFS[ref]))
   console.log("clear all intervals triggered")
 }
 

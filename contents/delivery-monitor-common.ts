@@ -4,7 +4,7 @@ function getOrderId(): string | undefined {
   }
 
   const currentLocation = new URL(window.location.href)
-  const orderId = currentLocation.pathname.split('/order-track/')[1]
+  const orderId = currentLocation.pathname.split("/order-track/")[1]
 
   return orderId
 }
