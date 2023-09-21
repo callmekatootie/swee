@@ -118,7 +118,7 @@ function DeliveryMonitorUI() {
           })}
         </div>
         <div
-          className={`w-[72px] rounded text-center mb-4 p-4 text-xs font-bold ${statusClass}`}>
+          className={`w-[72px] rounded text-center mb-4 p-2 text-xs font-bold ${statusClass}`}>
           {statusText}
         </div>
       </div>
