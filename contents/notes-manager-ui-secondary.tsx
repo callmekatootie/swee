@@ -49,7 +49,7 @@ function NotesIcon() {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-6 h-6">
+        className="w-5 h-5">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -96,7 +96,7 @@ function NotesManagerUISecondary({ anchor }: { anchor: PlasmoCSUIAnchor }) {
 
   return (
     <div
-      className="absolute -top-9 right-0 cursor-pointer opacity-50 hover:opacity-100"
+      className="absolute -top-5 right-0 cursor-pointer opacity-50 hover:opacity-100"
       onClick={scrolToItem}>
       <NotesIcon />
     </div>

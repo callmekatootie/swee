@@ -1,33 +1,70 @@
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+# Swee - Chrome Extension for Enhanced Swiggy Experience
 
-## Getting Started
+![Swee Logo](./assets/logo.png)
 
-First, run the development server:
+Swee is a Chrome extension that enhances your Swiggy experience by allowing you to add notes to food items from various restaurants and track the delivery time in real-time. With Swee, you can make informed decisions about your future orders and stay updated on your delivery's progress.
 
-```bash
-pnpm dev
-# or
-npm run dev
-```
+## Features
 
-Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
+### 1. Food Notes
 
-You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
+Swee enables you to add personal notes to food items from different restaurants. This feature helps you keep track of which dishes you liked, disliked, or want to try again. 
 
-For further guidance, [visit our Documentation](https://docs.plasmo.com/)
+![Food Notes Screenshot](./assets/notes-manager.png)
 
-## Making production build
+To use Food Notes:
+1. [Install the Swee Chrome extension.](#installation)
+2. Navigate to the Swiggy website and select a restaurant.
+3. Against each food item, you should see a notes section, allowing you to view any existing notes and add new notes.
+4. In the new note panel, you can enter and save notes for individual food items.
+5. Further, in the Order Again section, you will also see an indicator informing you of any existing notes on the items, which when clicked, scrolls the page to the detailed food item section where you can view the note
 
-Run the following:
+**No data is shared with any server. Your notes are stored within your browser itself.**
 
-```bash
-pnpm build
-# or
-npm run build
-```
+### 2. Delivery Tracker
 
-This should create a production bundle for your extension, ready to be zipped and published to the stores.
+Swee provides a real-time delivery tracker that monitors the promised delivery time and the estimated delivery time. This feature helps you gauge if the delivery is on schedule or running behind.
 
-## Submit to the webstores
+![Delivery Tracker Screenshot](./assets/delivery-monitor.png)
 
-The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
+To use the Delivery Tracker:
+1. [Install the Swee Chrome extension.](#installation)
+2. Place an order on Swiggy.
+3. Once the payment goes through and you are on the delivery tracking page, you should see the delivery time as mentioned by Swiggy. When this happens, you should see a secondary delivery tracker on top of it.
+4. The Delivery Tracker will display the promised delivery time and the current estimated delivery time
+
+## Installation
+
+To install Swee on your local development environment, follow these steps:
+
+1. Clone this repository:
+
+  ```bash
+  $ git clone https://github.com/callmekatootie/swee.git
+  ```
+
+2. Navigate to the `swee` directory and install [pnpm](https://pnpm.io/installation)
+3. Install dependencies - `$ pnpm install`
+4. You can now run the extension in [development mode](https://docs.plasmo.com/framework/workflows/dev) or [production mode](https://docs.plasmo.com/framework/workflows/build).
+
+**(You can also use npm instead of pnpm)**
+
+## Contributing
+
+We welcome contributions from other developers to improve Swee. Feel free to fork this repository, make changes, and submit pull requests.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Feedback and Support
+
+If you encounter any issues, have suggestions, or need support, please create an issue in the [GitHub repository](https://github.com/callmekatootie/swee/issues).
+
+### Why is this not publised to the Chrome store?
+
+This is a hobby project and a demonstration of my skills more than anything else.
+
+---
+
+Happy Swiggy ordering with Swee! 🍔🍕🚀
