@@ -10,9 +10,9 @@ function getOrderId(): string | undefined {
 }
 
 export const ALARM_NAMES = {
-  INITIALIZE_MONITOR: "swee_initialize-delivery-monitor",
-  MONITOR_DELIVERY: "swee_delivery-monitor",
-  MONITOR_DELIVERED: "swee_delivered"
+  MONITOR_INITIALIZATION: "swee_monitor-initialization",
+  MONITOR_DELIVERY: "swee_monitor-delivery",
+  MONITOR_DELIVERED: "swee_monitor-delivered"
 }
 
 export enum ORDER_KEY_TYPES {

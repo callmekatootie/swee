@@ -103,7 +103,7 @@ function DeliveryMonitorUI() {
   return (
     <div className="z-10 rounded w-[100px] shadow-md bg-slate-800">
       <div className="flex flex-col justify-center items-center text-white">
-        <div className="pt-2.5 pb-0.5 opacity-60 text-xs">PREDICTED</div>
+        <div className="pt-2.5 pb-0.5 opacity-60 text-xs">ESTIMATED</div>
         <div className="pb-2 text-base font-semibold">
           {prediction.toLocaleTimeString([], {
             hour: "2-digit",

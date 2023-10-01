@@ -11,7 +11,7 @@ import {
 const TEN_SECONDS_IN_MS = 10000
 
 const INTERVAL_REFS = {
-  INITIALIZE_MONITOR: null,
+  MONITOR_INITIALIZATION: null,
   MONITOR_DELIVERY: null,
   MONITOR_DELIVERED: null
 }
@@ -70,8 +70,8 @@ function checkForDeliveredStatus(): boolean {
 
 async function registerInitAlarm() {
   // Check for initial ETA every 10 seconds
-  INTERVAL_REFS.INITIALIZE_MONITOR = setInterval(
-    async () => await handleAlarms(ALARM_NAMES.INITIALIZE_MONITOR),
+  INTERVAL_REFS.MONITOR_INITIALIZATION = setInterval(
+    async () => await handleAlarms(ALARM_NAMES.MONITOR_INITIALIZATION),
     TEN_SECONDS_IN_MS
   )
   console.log("registerInitAlarm sets up initialize monitor interval")
@@ -93,7 +93,7 @@ async function handleInitialDelivery() {
   // We know the initially promised time
   // We now only need to monitor any updates to the promised time
   // Trigger the alarm to monitor the delivery time periodically
-  clearInterval(ALARM_NAMES.INITIALIZE_MONITOR)
+  clearInterval(INTERVAL_REFS.MONITOR_INITIALIZATION)
 
   await registerMonitorAlarm()
   console.log(
@@ -143,7 +143,7 @@ async function handleDeliveredStatus() {
 
 async function handleAlarms(alarmName: string) {
   console.log(alarmName, "triggered")
-  if (alarmName === ALARM_NAMES.INITIALIZE_MONITOR) {
+  if (alarmName === ALARM_NAMES.MONITOR_INITIALIZATION) {
     await handleInitialDelivery()
   } else if (alarmName === ALARM_NAMES.MONITOR_DELIVERY) {
     await handleUpdatedDelivery()
@@ -178,7 +178,7 @@ async function init() {
     console.log("Registering monitor alarm")
     await registerMonitorAlarm()
   } else {
-    console.log("ETA key NOT found", eta)
+    console.log("ETA key NOT found")
     console.log("Registering init alarm")
     await registerInitAlarm()
   }
